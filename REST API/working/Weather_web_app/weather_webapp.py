@@ -22,6 +22,9 @@ import os # to check if csv file already exists before exporting the data into c
 import streamlit as st # ipmorts streamlit to create web app using 'app.py' file
 import altair as alt # imports altair package
 import pytz # to display current date & time
+import time # to run python code every 10 minutes using a timer
+
+
 
 
 st.set_page_config(page_title='Weather forecast', 
@@ -35,147 +38,152 @@ location = 'St Albans'
 full_api_link_current = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&units=metric&limit=1&appid=4d9e86afd3e0034d2ad0b63e6c30da28"
 full_api_link_forecast = "https://api.openweathermap.org/data/2.5/forecast?q="+location+"&units=metric&limit=1&appid=4d9e86afd3e0034d2ad0b63e6c30da28"
 #filename = 'weather.csv'
+streamlit_key = 0 # used to make unique key in order to be able to put streamlit into a loop and avoid error
 
-# Create empty lists to populate with values later on
-temp = []
-feels_like = []
-temp_min = []
-temp_max = []
-weather_desc = []
-wind_speed = []
-precipitation = []
-city = []
-date_time = []
-sunrise = []
-sunset = []
-type = []
+while True:
+    # Create empty lists to populate with values later on
+    temp = []
+    feels_like = []
+    temp_min = []
+    temp_max = []
+    weather_desc = []
+    wind_speed = []
+    precipitation = []
+    city = []
+    date_time = []
+    sunrise = []
+    sunset = []
+    type = []
 
-def download_API_function(full_api_link): # function to download weather data via API
-    api_link = requests.get(full_api_link)
-    api_data = api_link.json()
-    return api_data
+    def download_API_function(full_api_link): # function to download weather data via API
+        api_link = requests.get(full_api_link)
+        api_data = api_link.json()
+        return api_data
 
-api_data_current = download_API_function(full_api_link_current) # downloads current weather data via API
-api_data_forecast = download_API_function(full_api_link_forecast) # downloads forecast weather data via API
-#print(api_data_current) # checks if the API request works
-#print(api_data_forecast) # checks if the API request works
+    api_data_current = download_API_function(full_api_link_current) # downloads current weather data via API
+    api_data_forecast = download_API_function(full_api_link_forecast) # downloads forecast weather data via API
+    #print(api_data_current) # checks if the API request works
+    #print(api_data_forecast) # checks if the API request works
 
-row_num = len(((api_data_forecast['list']))) # finds number of rows in the dataset
+    row_num = len(((api_data_forecast['list']))) # finds number of rows in the dataset
 
-# Parses current weather data
-if api_data_current['cod'] == '404': # if the city doesn't exist, then ask to re-enter correct name
-    print("Invalid city: {}, please check you entered it City name correctly".format(location))
-else:
-    # extracts current weather data and stores it in relevant list variables
-    temp.append(api_data_current['main']['temp'])
-    feels_like.append(api_data_current['main']['feels_like'])
-    temp_min.append(api_data_current['main']['temp_min'])
-    temp_max.append(api_data_current['main']['temp_max'])
-    weather_desc.append(api_data_current['weather'][0]['description'])
-    wind_speed.append(api_data_current['wind']['speed'])
-    try: # using try except method to check if 'rain' value is available and captures it in 'precipitation' list. If 'rain' value is not available, then captures '0'
-        precipitation.append(api_data_current['rain']['1h'])
-    except KeyError:
-        precipitation.append(0)
-        pass
-    city.append(api_data_current['name'])
-    epoch_date = (api_data_current['dt'])
-    epoch_sunrise = (api_data_current['sys']['sunrise'])
-    epoch_sunset = (api_data_current['sys']['sunset'])
-    date_time.append(datetime.datetime.fromtimestamp(epoch_date)) # converts epoch to Datetime
-    sunrise.append(datetime.datetime.fromtimestamp(epoch_sunrise)) # converts epoch to Datetime
-    sunset.append(datetime.datetime.fromtimestamp(epoch_sunset)) # converts epoch to Datetime
-    type.append('Current')
-    # extracts current weather data and stores it in relevant list variables
-    for x in range(row_num):
-        temp.append(api_data_forecast['list'][x]['main']['temp'])
-        feels_like.append(api_data_forecast['list'][x]['main']['feels_like'])
-        temp_min.append(api_data_forecast['list'][x]['main']['temp_min'])
-        temp_max.append(api_data_forecast['list'][x]['main']['temp_max'])
-        weather_desc.append(api_data_forecast['list'][x]['weather'][0]['description'])
-        wind_speed.append(api_data_forecast['list'][x]['wind']['speed'])
+    # Parses current weather data
+    if api_data_current['cod'] == '404': # if the city doesn't exist, then ask to re-enter correct name
+        print("Invalid city: {}, please check you entered it City name correctly".format(location))
+    else:
+        # extracts current weather data and stores it in relevant list variables
+        temp.append(api_data_current['main']['temp'])
+        feels_like.append(api_data_current['main']['feels_like'])
+        temp_min.append(api_data_current['main']['temp_min'])
+        temp_max.append(api_data_current['main']['temp_max'])
+        weather_desc.append(api_data_current['weather'][0]['description'])
+        wind_speed.append(api_data_current['wind']['speed'])
         try: # using try except method to check if 'rain' value is available and captures it in 'precipitation' list. If 'rain' value is not available, then captures '0'
-            precipitation.append(api_data_forecast['list'][x]['rain']['3h'])
+            precipitation.append(api_data_current['rain']['1h'])
         except KeyError:
             precipitation.append(0)
             pass
-        city.append(api_data_forecast['city']['name'])
-        epoch_date_val = (api_data_forecast['list'][x]['dt'])
-        epoch_sunrise_val = (api_data_forecast['city']['sunrise'])
-        epoch_sunset_val = (api_data_forecast['city']['sunset'])
-        date_time.append(datetime.datetime.fromtimestamp(epoch_date_val)) # converts epoch to Datetime
-        sunrise.append(datetime.datetime.fromtimestamp(epoch_sunrise_val)) # converts epoch to Datetime
-        sunset.append(datetime.datetime.fromtimestamp(epoch_sunset_val)) # converts epoch to Datetime
-        type.append('Forecast')
+        city.append(api_data_current['name'])
+        epoch_date = (api_data_current['dt'])
+        epoch_sunrise = (api_data_current['sys']['sunrise'])
+        epoch_sunset = (api_data_current['sys']['sunset'])
+        date_time.append(datetime.datetime.fromtimestamp(epoch_date)) # converts epoch to Datetime
+        sunrise.append(datetime.datetime.fromtimestamp(epoch_sunrise)) # converts epoch to Datetime
+        sunset.append(datetime.datetime.fromtimestamp(epoch_sunset)) # converts epoch to Datetime
+        type.append('Current')
+        # extracts current weather data and stores it in relevant list variables
+        for x in range(row_num):
+            temp.append(api_data_forecast['list'][x]['main']['temp'])
+            feels_like.append(api_data_forecast['list'][x]['main']['feels_like'])
+            temp_min.append(api_data_forecast['list'][x]['main']['temp_min'])
+            temp_max.append(api_data_forecast['list'][x]['main']['temp_max'])
+            weather_desc.append(api_data_forecast['list'][x]['weather'][0]['description'])
+            wind_speed.append(api_data_forecast['list'][x]['wind']['speed'])
+            try: # using try except method to check if 'rain' value is available and captures it in 'precipitation' list. If 'rain' value is not available, then captures '0'
+                precipitation.append(api_data_forecast['list'][x]['rain']['3h'])
+            except KeyError:
+                precipitation.append(0)
+                pass
+            city.append(api_data_forecast['city']['name'])
+            epoch_date_val = (api_data_forecast['list'][x]['dt'])
+            epoch_sunrise_val = (api_data_forecast['city']['sunrise'])
+            epoch_sunset_val = (api_data_forecast['city']['sunset'])
+            date_time.append(datetime.datetime.fromtimestamp(epoch_date_val)) # converts epoch to Datetime
+            sunrise.append(datetime.datetime.fromtimestamp(epoch_sunrise_val)) # converts epoch to Datetime
+            sunset.append(datetime.datetime.fromtimestamp(epoch_sunset_val)) # converts epoch to Datetime
+            type.append('Forecast')
 
-# Exports historical and forecast weather data to CSV
-df = pd.DataFrame({'city': city, 'temp': temp, 'feels_like': feels_like, 'temp_min': temp_min, 'temp_max': temp_max, 'wind_speed': wind_speed, 'precipitation': precipitation, 'date_time': date_time, 'sunrise': sunrise, 'sunset': sunset, 'type': type}) # creates empty DataFrame and populates it with data from lists
-df = pd.melt(df, id_vars=['city', 'type', 'date_time', 'sunrise','sunset'], value_vars=['temp', 'feels_like', 'temp_min', 'temp_max', 'wind_speed', 'precipitation']) # gather columns with numbers into rows and show their results under new 'value' column. This is in order to be able to better chart the data.
+
+    # Exports historical and forecast weather data to 'df' Pandas DataFrame
+    df = pd.DataFrame({'city': city, 'temp': temp, 'feels_like': feels_like, 'temp_min': temp_min, 'temp_max': temp_max, 'wind_speed': wind_speed, 'precipitation': precipitation, 'date_time': date_time, 'sunrise': sunrise, 'sunset': sunset, 'type': type}) # creates empty DataFrame and populates it with data from lists
+    df = pd.melt(df, id_vars=['city', 'type', 'date_time', 'sunrise','sunset'], value_vars=['temp', 'feels_like', 'temp_min', 'temp_max', 'wind_speed', 'precipitation']) # gather columns with numbers into rows and show their results under new 'value' column. This is in order to be able to better chart the data.
 
 
+    # Streamlit script to turn this python script into wewb app
+    # instructions here: https://www.youtube.com/watch?v=Sb0A9i6d320
 
+    st.sidebar.header('Please filter here:') # creates sidebar to select which measures to display
+    select_measures = st.sidebar.multiselect(
+        'Select measure to show',
+        options=df['variable'].unique(),
+        default=df['variable'].unique(), key=streamlit_key
+    )
+    streamlit_key = streamlit_key+1
 
-# Streamlit script to turn this python script into wewb app
-# instructions here: https://www.youtube.com/watch?v=Sb0A9i6d320
+    st.sidebar.header('Please filter here:') # creates sidebar to select city
+    select_city = st.sidebar.multiselect(
+        'Select measure to show',
+        options=df['city'].unique(),
+        default=df['city'].unique(), key=streamlit_key
+    )
+    streamlit_key = streamlit_key+1
 
-st.sidebar.header('Please filter here:') # creates sidebar to select which measures to display
-select_measures = st.sidebar.multiselect(
-    'Select measure to show',
-    options=df['variable'].unique(),
-    default=df['variable'].unique()
-)
+    df_selection = df.query("variable == @select_measures & city == @select_city") # to filter table results using fields in the left-hand pane 
+    #st.dataframe(df_selection) # show filtered data on streamlit page
 
-st.sidebar.header('Please filter here:') # creates sidebar to select city
-select_city = st.sidebar.multiselect(
-    'Select measure to show',
-    options=df['city'].unique(),
-    default=df['city'].unique()
-)
+    # Creates bar chart
+    altchart = alt.Chart(df_selection, title=location).mark_line().encode(
+        x=alt.X('date_time:T', axis=alt.Axis(format='%a %H:%M')),
+        #x=alt.X('monthdatehours(date_time):T'),
+        y='value',
+        color='variable'
+    ).interactive() # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
+    # ).interactive().transform_filter({'field': 'variable', 'oneOf': ['temp', 'wind_speed', 'precipitation']}) # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
 
-df_selection = df.query("variable == @select_measures & city == @select_city") # to filter table results using fields in the left-hand pane 
-#st.dataframe(df_selection) # show filtered data on streamlit page
+    # shows time in different timezones (NYC & London)
+    tz_NY = pytz.timezone('America/New_York') 
+    datetime_NY = datetime.datetime.now(tz_NY)
+    NY_time = "NY time:", datetime_NY.strftime("%H:%M")
+    tz_London = pytz.timezone('Europe/London')
+    datetime_London = datetime.datetime.now(tz_London)
+    LN_time = "London time:", datetime_London.strftime("%H:%M")
 
-# Creates bar chart
-altchart = alt.Chart(df_selection, title=location).mark_line().encode(
-    x=alt.X('date_time:T', axis=alt.Axis(format='%a %H:%M')),
-    #x=alt.X('monthdatehours(date_time):T'),
-    y='value',
-    color='variable'
-).interactive() # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
-# ).interactive().transform_filter({'field': 'variable', 'oneOf': ['temp', 'wind_speed', 'precipitation']}) # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
+    # pulls data that will later be displayed in DataFrame table
+    curr_weather = "Weather now", (api_data_current['weather'][0]['description'])
+    curr_sunrise = "Sunrise", df.at[0, 'sunrise'].strftime("%H:%M")
+    curr_sunset = "Sunset", df.at[0, 'sunset'].strftime("%H:%M")
+    curr_date = "Time now", datetime.datetime.now().strftime("%a %d %b %Y %H:%M")
+    curr_update_time = "Last updated", df.at[0, 'date_time'].strftime("%H:%M")
 
-# shows time in different timezones (NYC & London)
-tz_NY = pytz.timezone('America/New_York') 
-datetime_NY = datetime.datetime.now(tz_NY)
-NY_time = "NY time:", datetime_NY.strftime("%H:%M")
-tz_London = pytz.timezone('Europe/London')
-datetime_London = datetime.datetime.now(tz_London)
-LN_time = "London time:", datetime_London.strftime("%H:%M")
+    # exports data to DataFrame and formats its for better presentation
+    curr_df = pd.DataFrame({curr_date[0]: curr_date[1:], LN_time[0]: LN_time[1:], NY_time[0]: NY_time[1:], curr_weather[0]: curr_weather[1:], curr_sunrise[0]: curr_sunrise[1:], curr_sunset[0]: curr_sunset[1:], curr_update_time[0]: curr_update_time[1:]}) # creates empty DataFrame and populates it with data from lists
+    curr_df = curr_df.transpose() # switches rows with columns in DataFrame
+    curr_df = curr_df.rename(columns={0: "Values"}) # renames '0' column to 'Values'
 
-# pulls data that will later be displayed in DataFrame table
-curr_weather = "Weather now", (api_data_current['weather'][0]['description'])
-curr_sunrise = "Sunrise", df.at[0, 'sunrise'].strftime("%H:%M")
-curr_sunset = "Sunset", df.at[0, 'sunset'].strftime("%H:%M")
-curr_date = "Time now", datetime.datetime.now().strftime("%a %d %b %Y %H:%M")
-curr_update_time = "Last updated", df.at[0, 'date_time'].strftime("%H:%M")
+    # creates two columns and shows chart and table in each of those columns
+    left_column, right_column = st.columns(2)
+    left_column.altair_chart(altchart, use_container_width=True) # shows filtered altair data chart on streamlit page and resizes it to fit the page
+    right_column.dataframe(curr_df, use_container_width=True) # shows current time, weather and other data as Pandas DataFrame table on streamlit page and resizes it to fit the page
+    # st.altair_chart(altchart, use_container_width=True) # shows filtered altair data on streamlit page and resizes it to fit the page
+    # st.dataframe(curr_df, use_container_width=True) # shows current time, weather and other data as Pandas DataFrame table on streamlit page and resizes it to fit the page
+    st.markdown('---') # to draw solid line on streamlit page
+    hide_st_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header {visibility: hidden;}
+        </style>
+        """
+    st.markdown(hide_st_style, unsafe_allow_html=True) # hides streamlit icons and logo from our web app
 
-# exports data to DataFrame and formats its for better presentation
-curr_df = pd.DataFrame({curr_date[0]: curr_date[1:], LN_time[0]: LN_time[1:], NY_time[0]: NY_time[1:], curr_weather[0]: curr_weather[1:], curr_sunrise[0]: curr_sunrise[1:], curr_sunset[0]: curr_sunset[1:], curr_update_time[0]: curr_update_time[1:]}) # creates empty DataFrame and populates it with data from lists
-curr_df = curr_df.transpose() # switches rows with columns in DataFrame
-curr_df = curr_df.rename(columns={0: "Values"}) # renames '0' column to 'Values'
-
-# creates two columns and shows chart and table in each of those columns
-left_column, right_column = st.columns(2)
-left_column.altair_chart(altchart, use_container_width=True) # shows filtered altair data chart on streamlit page and resizes it to fit the page
-right_column.dataframe(curr_df, use_container_width=True) # shows current time, weather and other data as Pandas DataFrame table on streamlit page and resizes it to fit the page
-# st.altair_chart(altchart, use_container_width=True) # shows filtered altair data on streamlit page and resizes it to fit the page
-# st.dataframe(curr_df, use_container_width=True) # shows current time, weather and other data as Pandas DataFrame table on streamlit page and resizes it to fit the page
-st.markdown('---') # to draw solid line on streamlit page
-hide_st_style = """
-    <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    </style>
-    """
-st.markdown(hide_st_style, unsafe_allow_html=True) # hides streamlit icons and logo from our web app
+    time.sleep(15) # runs code to query API every 10 minutes
