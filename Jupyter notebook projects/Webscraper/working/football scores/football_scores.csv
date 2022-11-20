@@ -1,0 +1,337 @@
+date,home_team,score,away_team
+13-08-2021,Brentford,2 - 0,Arsenal
+22-08-2021,Arsenal,0 - 2,Chelsea
+28-08-2021,Man City,5 - 0,Arsenal
+11-09-2021,Arsenal,1 - 0,Norwich
+18-09-2021,Burnley,0 - 1,Arsenal
+26-09-2021,Arsenal,3 - 1,Tottenham
+02-10-2021,Brighton,0 - 0,Arsenal
+18-10-2021,Arsenal,2 - 2,Crystal Palace
+22-10-2021,Arsenal,3 - 1,Aston Villa
+30-10-2021,Leicester,0 - 2,Arsenal
+07-11-2021,Arsenal,1 - 0,Watford
+20-11-2021,Liverpool,4 - 0,Arsenal
+27-11-2021,Arsenal,2 - 0,Newcastle
+02-12-2021,Man United,3 - 2,Arsenal
+06-12-2021,Everton,2 - 1,Arsenal
+11-12-2021,Arsenal,3 - 0,Southampton
+15-12-2021,Arsenal,? - ?,West Ham
+14-08-2021,Watford,3 - 2,Aston Villa
+21-08-2021,Aston Villa,2 - 0,Newcastle
+28-08-2021,Aston Villa,1 - 1,Brentford
+11-09-2021,Chelsea,3 - 0,Aston Villa
+18-09-2021,Aston Villa,3 - 0,Everton
+25-09-2021,Man United,0 - 1,Aston Villa
+03-10-2021,Tottenham,2 - 1,Aston Villa
+16-10-2021,Aston Villa,2 - 3,Wolves
+22-10-2021,Arsenal,3 - 1,Aston Villa
+31-10-2021,Aston Villa,1 - 4,West Ham
+05-11-2021,Southampton,1 - 0,Aston Villa
+20-11-2021,Aston Villa,2 - 0,Brighton
+27-11-2021,Crystal Palace,1 - 2,Aston Villa
+01-12-2021,Aston Villa,1 - 2,Man City
+05-12-2021,Aston Villa,2 - 1,Leicester
+11-12-2021,Liverpool,1 - 0,Aston Villa
+14-12-2021,Norwich,? - ?,Aston Villa
+13-08-2021,Brentford,2 - 0,Arsenal
+21-08-2021,Crystal Palace,0 - 0,Brentford
+28-08-2021,Aston Villa,1 - 1,Brentford
+11-09-2021,Brentford,0 - 1,Brighton
+18-09-2021,Wolves,0 - 2,Brentford
+25-09-2021,Brentford,3 - 3,Liverpool
+03-10-2021,West Ham,1 - 2,Brentford
+16-10-2021,Brentford,0 - 1,Chelsea
+24-10-2021,Brentford,1 - 2,Leicester
+30-10-2021,Burnley,3 - 1,Brentford
+06-11-2021,Brentford,1 - 2,Norwich
+20-11-2021,Newcastle,3 - 3,Brentford
+28-11-2021,Brentford,1 - 0,Everton
+02-12-2021,Tottenham,2 - 0,Brentford
+05-12-2021,Leeds,2 - 2,Brentford
+10-12-2021,Brentford,2 - 1,Watford
+14-12-2021,Brentford,? - ?,Man United
+14-08-2021,Burnley,1 - 2,Brighton
+21-08-2021,Brighton,2 - 0,Watford
+28-08-2021,Brighton,0 - 2,Everton
+11-09-2021,Brentford,0 - 1,Brighton
+19-09-2021,Brighton,2 - 1,Leicester
+27-09-2021,Crystal Palace,1 - 1,Brighton
+02-10-2021,Brighton,0 - 0,Arsenal
+16-10-2021,Norwich,0 - 0,Brighton
+23-10-2021,Brighton,1 - 4,Man City
+30-10-2021,Liverpool,2 - 2,Brighton
+06-11-2021,Brighton,1 - 1,Newcastle
+20-11-2021,Aston Villa,2 - 0,Brighton
+27-11-2021,Brighton,0 - 0,Leeds
+01-12-2021,West Ham,1 - 1,Brighton
+04-12-2021,Southampton,1 - 1,Brighton
+15-12-2021,Brighton,? - ?,Wolves
+14-08-2021,Burnley,1 - 2,Brighton
+21-08-2021,Liverpool,2 - 0,Burnley
+29-08-2021,Burnley,1 - 1,Leeds
+13-09-2021,Everton,3 - 1,Burnley
+18-09-2021,Burnley,0 - 1,Arsenal
+25-09-2021,Leicester,2 - 2,Burnley
+02-10-2021,Burnley,0 - 0,Norwich
+16-10-2021,Man City,2 - 0,Burnley
+23-10-2021,Southampton,2 - 2,Burnley
+30-10-2021,Burnley,3 - 1,Brentford
+06-11-2021,Chelsea,1 - 1,Burnley
+20-11-2021,Burnley,3 - 3,Crystal Palace
+01-12-2021,Wolves,0 - 0,Burnley
+04-12-2021,Newcastle,1 - 0,Burnley
+12-12-2021,Burnley,0 - 0,West Ham
+15-12-2021,Burnley,? - ?,Watford
+14-08-2021,Chelsea,3 - 0,Crystal Palace
+22-08-2021,Arsenal,0 - 2,Chelsea
+28-08-2021,Liverpool,1 - 1,Chelsea
+11-09-2021,Chelsea,3 - 0,Aston Villa
+19-09-2021,Tottenham,0 - 3,Chelsea
+25-09-2021,Chelsea,0 - 1,Man City
+02-10-2021,Chelsea,3 - 1,Southampton
+16-10-2021,Brentford,0 - 1,Chelsea
+23-10-2021,Chelsea,7 - 0,Norwich
+30-10-2021,Newcastle,0 - 3,Chelsea
+06-11-2021,Chelsea,1 - 1,Burnley
+20-11-2021,Leicester,0 - 3,Chelsea
+28-11-2021,Chelsea,1 - 1,Man United
+01-12-2021,Watford,1 - 2,Chelsea
+04-12-2021,West Ham,3 - 2,Chelsea
+11-12-2021,Chelsea,3 - 2,Leeds
+16-12-2021,Chelsea,? - ?,Everton
+14-08-2021,Chelsea,3 - 0,Crystal Palace
+21-08-2021,Crystal Palace,0 - 0,Brentford
+28-08-2021,West Ham,2 - 2,Crystal Palace
+11-09-2021,Crystal Palace,3 - 0,Tottenham
+18-09-2021,Liverpool,3 - 0,Crystal Palace
+27-09-2021,Crystal Palace,1 - 1,Brighton
+03-10-2021,Crystal Palace,2 - 2,Leicester
+18-10-2021,Arsenal,2 - 2,Crystal Palace
+23-10-2021,Crystal Palace,1 - 1,Newcastle
+30-10-2021,Man City,0 - 2,Crystal Palace
+06-11-2021,Crystal Palace,2 - 0,Wolves
+20-11-2021,Burnley,3 - 3,Crystal Palace
+27-11-2021,Crystal Palace,1 - 2,Aston Villa
+30-11-2021,Leeds,1 - 0,Crystal Palace
+05-12-2021,Man United,1 - 0,Crystal Palace
+12-12-2021,Crystal Palace,3 - 1,Everton
+15-12-2021,Crystal Palace,? - ?,Southampton
+14-08-2021,Everton,3 - 1,Southampton
+21-08-2021,Leeds,2 - 2,Everton
+28-08-2021,Brighton,0 - 2,Everton
+13-09-2021,Everton,3 - 1,Burnley
+18-09-2021,Aston Villa,3 - 0,Everton
+25-09-2021,Everton,2 - 0,Norwich
+02-10-2021,Man United,1 - 1,Everton
+17-10-2021,Everton,0 - 1,West Ham
+23-10-2021,Everton,2 - 5,Watford
+01-11-2021,Wolves,2 - 1,Everton
+07-11-2021,Everton,0 - 0,Tottenham
+21-11-2021,Man City,3 - 0,Everton
+28-11-2021,Brentford,1 - 0,Everton
+01-12-2021,Everton,1 - 4,Liverpool
+06-12-2021,Everton,2 - 1,Arsenal
+12-12-2021,Crystal Palace,3 - 1,Everton
+16-12-2021,Chelsea,? - ?,Everton
+14-08-2021,Man United,5 - 1,Leeds
+21-08-2021,Leeds,2 - 2,Everton
+29-08-2021,Burnley,1 - 1,Leeds
+12-09-2021,Leeds,0 - 3,Liverpool
+17-09-2021,Newcastle,1 - 1,Leeds
+25-09-2021,Leeds,1 - 2,West Ham
+02-10-2021,Leeds,1 - 0,Watford
+16-10-2021,Southampton,1 - 0,Leeds
+23-10-2021,Leeds,1 - 1,Wolves
+31-10-2021,Norwich,1 - 2,Leeds
+07-11-2021,Leeds,1 - 1,Leicester
+21-11-2021,Tottenham,2 - 1,Leeds
+27-11-2021,Brighton,0 - 0,Leeds
+30-11-2021,Leeds,1 - 0,Crystal Palace
+05-12-2021,Leeds,2 - 2,Brentford
+11-12-2021,Chelsea,3 - 2,Leeds
+14-12-2021,Man City,? - ?,Leeds
+14-08-2021,Leicester,1 - 0,Wolves
+23-08-2021,West Ham,4 - 1,Leicester
+28-08-2021,Norwich,1 - 2,Leicester
+11-09-2021,Leicester,0 - 1,Man City
+19-09-2021,Brighton,2 - 1,Leicester
+25-09-2021,Leicester,2 - 2,Burnley
+03-10-2021,Crystal Palace,2 - 2,Leicester
+16-10-2021,Leicester,4 - 2,Man United
+24-10-2021,Brentford,1 - 2,Leicester
+30-10-2021,Leicester,0 - 2,Arsenal
+07-11-2021,Leeds,1 - 1,Leicester
+20-11-2021,Leicester,0 - 3,Chelsea
+28-11-2021,Leicester,4 - 2,Watford
+01-12-2021,Southampton,2 - 2,Leicester
+05-12-2021,Aston Villa,2 - 1,Leicester
+12-12-2021,Leicester,4 - 0,Newcastle
+16-12-2021,Leicester,? - ?,Tottenham
+14-08-2021,Norwich,0 - 3,Liverpool
+21-08-2021,Liverpool,2 - 0,Burnley
+28-08-2021,Liverpool,1 - 1,Chelsea
+12-09-2021,Leeds,0 - 3,Liverpool
+18-09-2021,Liverpool,3 - 0,Crystal Palace
+25-09-2021,Brentford,3 - 3,Liverpool
+03-10-2021,Liverpool,2 - 2,Man City
+16-10-2021,Watford,0 - 5,Liverpool
+24-10-2021,Man United,0 - 5,Liverpool
+30-10-2021,Liverpool,2 - 2,Brighton
+07-11-2021,West Ham,3 - 2,Liverpool
+20-11-2021,Liverpool,4 - 0,Arsenal
+27-11-2021,Liverpool,4 - 0,Southampton
+01-12-2021,Everton,1 - 4,Liverpool
+04-12-2021,Wolves,0 - 1,Liverpool
+11-12-2021,Liverpool,1 - 0,Aston Villa
+16-12-2021,Liverpool,? - ?,Newcastle
+15-08-2021,Tottenham,1 - 0,Man City
+21-08-2021,Man City,5 - 0,Norwich
+28-08-2021,Man City,5 - 0,Arsenal
+11-09-2021,Leicester,0 - 1,Man City
+18-09-2021,Man City,0 - 0,Southampton
+25-09-2021,Chelsea,0 - 1,Man City
+03-10-2021,Liverpool,2 - 2,Man City
+16-10-2021,Man City,2 - 0,Burnley
+23-10-2021,Brighton,1 - 4,Man City
+30-10-2021,Man City,0 - 2,Crystal Palace
+06-11-2021,Man United,0 - 2,Man City
+21-11-2021,Man City,3 - 0,Everton
+28-11-2021,Man City,2 - 1,West Ham
+01-12-2021,Aston Villa,1 - 2,Man City
+04-12-2021,Watford,1 - 3,Man City
+11-12-2021,Man City,1 - 0,Wolves
+14-12-2021,Man City,? - ?,Leeds
+14-08-2021,Man United,5 - 1,Leeds
+22-08-2021,Southampton,1 - 1,Man United
+29-08-2021,Wolves,0 - 1,Man United
+11-09-2021,Man United,4 - 1,Newcastle
+19-09-2021,West Ham,1 - 2,Man United
+25-09-2021,Man United,0 - 1,Aston Villa
+02-10-2021,Man United,1 - 1,Everton
+16-10-2021,Leicester,4 - 2,Man United
+24-10-2021,Man United,0 - 5,Liverpool
+30-10-2021,Tottenham,0 - 3,Man United
+06-11-2021,Man United,0 - 2,Man City
+20-11-2021,Watford,4 - 1,Man United
+28-11-2021,Chelsea,1 - 1,Man United
+02-12-2021,Man United,3 - 2,Arsenal
+05-12-2021,Man United,1 - 0,Crystal Palace
+11-12-2021,Norwich,0 - 1,Man United
+14-12-2021,Brentford,? - ?,Man United
+15-08-2021,Newcastle,2 - 4,West Ham
+21-08-2021,Aston Villa,2 - 0,Newcastle
+28-08-2021,Newcastle,2 - 2,Southampton
+11-09-2021,Man United,4 - 1,Newcastle
+17-09-2021,Newcastle,1 - 1,Leeds
+25-09-2021,Watford,1 - 1,Newcastle
+02-10-2021,Wolves,2 - 1,Newcastle
+17-10-2021,Newcastle,2 - 3,Tottenham
+23-10-2021,Crystal Palace,1 - 1,Newcastle
+30-10-2021,Newcastle,0 - 3,Chelsea
+06-11-2021,Brighton,1 - 1,Newcastle
+20-11-2021,Newcastle,3 - 3,Brentford
+27-11-2021,Arsenal,2 - 0,Newcastle
+30-11-2021,Newcastle,1 - 1,Norwich
+04-12-2021,Newcastle,1 - 0,Burnley
+12-12-2021,Leicester,4 - 0,Newcastle
+16-12-2021,Liverpool,? - ?,Newcastle
+14-08-2021,Norwich,0 - 3,Liverpool
+21-08-2021,Man City,5 - 0,Norwich
+28-08-2021,Norwich,1 - 2,Leicester
+11-09-2021,Arsenal,1 - 0,Norwich
+18-09-2021,Norwich,1 - 3,Watford
+25-09-2021,Everton,2 - 0,Norwich
+02-10-2021,Burnley,0 - 0,Norwich
+16-10-2021,Norwich,0 - 0,Brighton
+23-10-2021,Chelsea,7 - 0,Norwich
+31-10-2021,Norwich,1 - 2,Leeds
+06-11-2021,Brentford,1 - 2,Norwich
+20-11-2021,Norwich,2 - 1,Southampton
+27-11-2021,Norwich,0 - 0,Wolves
+30-11-2021,Newcastle,1 - 1,Norwich
+05-12-2021,Tottenham,3 - 0,Norwich
+11-12-2021,Norwich,0 - 1,Man United
+14-12-2021,Norwich,? - ?,Aston Villa
+14-08-2021,Everton,3 - 1,Southampton
+22-08-2021,Southampton,1 - 1,Man United
+28-08-2021,Newcastle,2 - 2,Southampton
+11-09-2021,Southampton,0 - 0,West Ham
+18-09-2021,Man City,0 - 0,Southampton
+26-09-2021,Southampton,0 - 1,Wolves
+02-10-2021,Chelsea,3 - 1,Southampton
+16-10-2021,Southampton,1 - 0,Leeds
+23-10-2021,Southampton,2 - 2,Burnley
+30-10-2021,Watford,0 - 1,Southampton
+05-11-2021,Southampton,1 - 0,Aston Villa
+20-11-2021,Norwich,2 - 1,Southampton
+27-11-2021,Liverpool,4 - 0,Southampton
+01-12-2021,Southampton,2 - 2,Leicester
+04-12-2021,Southampton,1 - 1,Brighton
+11-12-2021,Arsenal,3 - 0,Southampton
+15-12-2021,Crystal Palace,? - ?,Southampton
+15-08-2021,Tottenham,1 - 0,Man City
+22-08-2021,Wolves,0 - 1,Tottenham
+29-08-2021,Tottenham,1 - 0,Watford
+11-09-2021,Crystal Palace,3 - 0,Tottenham
+19-09-2021,Tottenham,0 - 3,Chelsea
+26-09-2021,Arsenal,3 - 1,Tottenham
+03-10-2021,Tottenham,2 - 1,Aston Villa
+17-10-2021,Newcastle,2 - 3,Tottenham
+24-10-2021,West Ham,1 - 0,Tottenham
+30-10-2021,Tottenham,0 - 3,Man United
+07-11-2021,Everton,0 - 0,Tottenham
+21-11-2021,Tottenham,2 - 1,Leeds
+02-12-2021,Tottenham,2 - 0,Brentford
+05-12-2021,Tottenham,3 - 0,Norwich
+16-12-2021,Leicester,? - ?,Tottenham
+14-08-2021,Watford,3 - 2,Aston Villa
+21-08-2021,Brighton,2 - 0,Watford
+29-08-2021,Tottenham,1 - 0,Watford
+11-09-2021,Watford,0 - 2,Wolves
+18-09-2021,Norwich,1 - 3,Watford
+25-09-2021,Watford,1 - 1,Newcastle
+02-10-2021,Leeds,1 - 0,Watford
+16-10-2021,Watford,0 - 5,Liverpool
+23-10-2021,Everton,2 - 5,Watford
+30-10-2021,Watford,0 - 1,Southampton
+07-11-2021,Arsenal,1 - 0,Watford
+20-11-2021,Watford,4 - 1,Man United
+28-11-2021,Leicester,4 - 2,Watford
+01-12-2021,Watford,1 - 2,Chelsea
+04-12-2021,Watford,1 - 3,Man City
+10-12-2021,Brentford,2 - 1,Watford
+15-12-2021,Burnley,? - ?,Watford
+15-08-2021,Newcastle,2 - 4,West Ham
+23-08-2021,West Ham,4 - 1,Leicester
+28-08-2021,West Ham,2 - 2,Crystal Palace
+11-09-2021,Southampton,0 - 0,West Ham
+19-09-2021,West Ham,1 - 2,Man United
+25-09-2021,Leeds,1 - 2,West Ham
+03-10-2021,West Ham,1 - 2,Brentford
+17-10-2021,Everton,0 - 1,West Ham
+24-10-2021,West Ham,1 - 0,Tottenham
+31-10-2021,Aston Villa,1 - 4,West Ham
+07-11-2021,West Ham,3 - 2,Liverpool
+20-11-2021,Wolves,1 - 0,West Ham
+28-11-2021,Man City,2 - 1,West Ham
+01-12-2021,West Ham,1 - 1,Brighton
+04-12-2021,West Ham,3 - 2,Chelsea
+12-12-2021,Burnley,0 - 0,West Ham
+15-12-2021,Arsenal,? - ?,West Ham
+14-08-2021,Leicester,1 - 0,Wolves
+22-08-2021,Wolves,0 - 1,Tottenham
+29-08-2021,Wolves,0 - 1,Man United
+11-09-2021,Watford,0 - 2,Wolves
+18-09-2021,Wolves,0 - 2,Brentford
+26-09-2021,Southampton,0 - 1,Wolves
+02-10-2021,Wolves,2 - 1,Newcastle
+16-10-2021,Aston Villa,2 - 3,Wolves
+23-10-2021,Leeds,1 - 1,Wolves
+01-11-2021,Wolves,2 - 1,Everton
+06-11-2021,Crystal Palace,2 - 0,Wolves
+20-11-2021,Wolves,1 - 0,West Ham
+27-11-2021,Norwich,0 - 0,Wolves
+01-12-2021,Wolves,0 - 0,Burnley
+04-12-2021,Wolves,0 - 1,Liverpool
+11-12-2021,Man City,1 - 0,Wolves
+15-12-2021,Brighton,? - ?,Wolves
