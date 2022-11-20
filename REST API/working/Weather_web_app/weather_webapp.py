@@ -5,6 +5,8 @@
 # My API key: 4d9e86afd3e0034d2ad0b63e6c30da28
 # current weather API is explained here: https://openweathermap.org/current
 # forecast weather API is explained here: https://openweathermap.org/forecast5
+# creating web app with Streamlit https://www.youtube.com/watch?v=ZDffoP6gjxc&t
+# deploying web app to Heroku is explained here https://www.youtube.com/watch?v=nJHrSvYxzjE&t
 
 # current weather by city name:   api.openweathermap.org/data/2.5/weather?q=St Albans&units=metric&limit=1&appid=4d9e86afd3e0034d2ad0b63e6c30da28
 # current weather by lat & long:   api.openweathermap.org/data/2.5/weather?lat=51.7564&lon=-0.3519&units=metric&limit=1&appid=4d9e86afd3e0034d2ad0b63e6c30da28
@@ -165,7 +167,7 @@ curr_df = curr_df.transpose() # switches rows with columns in DataFrame
 curr_df = curr_df.rename(columns={0: "Values"}) # renames '0' column to 'Values'
 
 # creates two columns and shows chart and table in each of those columns
-left_column, right_column = st.columns(2)
+left_column, right_column = st.columns([2,1])
 left_column.altair_chart(altchart, use_container_width=True) # shows filtered altair data chart on streamlit page and resizes it to fit the page
 right_column.dataframe(curr_df, use_container_width=True) # shows current time, weather and other data as Pandas DataFrame table on streamlit page and resizes it to fit the page
 # st.altair_chart(altchart, use_container_width=True) # shows filtered altair data on streamlit page and resizes it to fit the page
