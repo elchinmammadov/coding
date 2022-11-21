@@ -6,6 +6,7 @@
 # current weather API is explained here: https://openweathermap.org/current
 # forecast weather API is explained here: https://openweathermap.org/forecast5
 # creating web app with Streamlit https://www.youtube.com/watch?v=ZDffoP6gjxc&t
+# fixing refresh of web app with Streamlit https://www.youtube.com/watch?v=5l9COMQ3acc
 # deploying web app to Heroku is explained here https://www.youtube.com/watch?v=nJHrSvYxzjE&t
 
 # current weather by city name:   api.openweathermap.org/data/2.5/weather?q=St Albans&units=metric&limit=1&appid=4d9e86afd3e0034d2ad0b63e6c30da28
