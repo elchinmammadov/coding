@@ -118,6 +118,30 @@ else:
 df = pd.DataFrame({'city': city, 'temp': temp, 'feels_like': feels_like, 'temp_min': temp_min, 'temp_max': temp_max, 'wind_speed': wind_speed, 'precipitation': precipitation, 'date_time': date_time, 'sunrise': sunrise, 'sunset': sunset, 'type': type}) # creates empty DataFrame and populates it with data from lists
 df = pd.melt(df, id_vars=['city', 'type', 'date_time', 'sunrise','sunset'], value_vars=['temp', 'feels_like', 'temp_min', 'temp_max', 'wind_speed', 'precipitation']) # gather columns with numbers into rows and show their results under new 'value' column. This is in order to be able to better chart the data.
 
+# pulls summary weather & timezone data to show in table
+
+# shows time in different timezones (NYC & London)
+tz_NY = pytz.timezone('America/New_York') 
+datetime_NY = datetime.datetime.now(tz_NY)
+NY_time = "NY time:", datetime_NY.strftime("%H:%M")
+tz_London = pytz.timezone('Europe/London')
+datetime_London = datetime.datetime.now(tz_London)
+LN_time = "London time:", datetime_London.strftime("%H:%M")
+
+# pulls data that will later be displayed in DataFrame table
+curr_weather = "Weather now", (api_data_current['weather'][0]['description'])
+curr_sunrise = "Sunrise", df.at[0, 'sunrise'].strftime("%H:%M")
+curr_sunset = "Sunset", df.at[0, 'sunset'].strftime("%H:%M")
+curr_date = "Time now", datetime.datetime.now().strftime("%a %d %b %Y %H:%M")
+curr_update_time = "Last updated", df.at[0, 'date_time'].strftime("%H:%M")
+
+# exports data to DataFrame and formats its for better presentation
+curr_df = pd.DataFrame({curr_date[0]: curr_date[1:], curr_weather[0]: curr_weather[1:], curr_sunrise[0]: curr_sunrise[1:], curr_sunset[0]: curr_sunset[1:], curr_update_time[0]: curr_update_time[1:], LN_time[0]: LN_time[1:], NY_time[0]: NY_time[1:]}) # creates empty DataFrame and populates it with data from lists
+curr_df = curr_df.transpose() # switches rows with columns in DataFrame
+curr_df = curr_df.rename(columns={0: "Values"}) # renames '0' column to 'Values'
+
+
+
 # Streamlit script to turn this python script into wewb app
 # instructions here: https://www.youtube.com/watch?v=Sb0A9i6d320
 
@@ -147,25 +171,6 @@ altchart = alt.Chart(df_selection, title=location).mark_line().encode(
 ).interactive() # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
 # ).interactive().transform_filter({'field': 'variable', 'oneOf': ['temp', 'wind_speed', 'precipitation']}) # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
 
-# shows time in different timezones (NYC & London)
-tz_NY = pytz.timezone('America/New_York') 
-datetime_NY = datetime.datetime.now(tz_NY)
-NY_time = "NY time:", datetime_NY.strftime("%H:%M")
-tz_London = pytz.timezone('Europe/London')
-datetime_London = datetime.datetime.now(tz_London)
-LN_time = "London time:", datetime_London.strftime("%H:%M")
-
-# pulls data that will later be displayed in DataFrame table
-curr_weather = "Weather now", (api_data_current['weather'][0]['description'])
-curr_sunrise = "Sunrise", df.at[0, 'sunrise'].strftime("%H:%M")
-curr_sunset = "Sunset", df.at[0, 'sunset'].strftime("%H:%M")
-curr_date = "Time now", datetime.datetime.now().strftime("%a %d %b %Y %H:%M")
-curr_update_time = "Last updated", df.at[0, 'date_time'].strftime("%H:%M")
-
-# exports data to DataFrame and formats its for better presentation
-curr_df = pd.DataFrame({curr_date[0]: curr_date[1:], LN_time[0]: LN_time[1:], NY_time[0]: NY_time[1:], curr_weather[0]: curr_weather[1:], curr_sunrise[0]: curr_sunrise[1:], curr_sunset[0]: curr_sunset[1:], curr_update_time[0]: curr_update_time[1:]}) # creates empty DataFrame and populates it with data from lists
-curr_df = curr_df.transpose() # switches rows with columns in DataFrame
-curr_df = curr_df.rename(columns={0: "Values"}) # renames '0' column to 'Values'
 
 # creates two columns and shows chart and table in each of those columns
 left_column, right_column = st.columns([2,1])
