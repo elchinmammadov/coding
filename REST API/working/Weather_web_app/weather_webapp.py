@@ -29,7 +29,6 @@ import time # to run python code every 10 minutes using a timer
 
 
 
-
 # Declare variables
 location = 'St Albans'
 #location = input("Enter city name: ") # asks user to enter city name
@@ -136,21 +135,19 @@ st.set_page_config(page_title='Weather forecast',
                     layout='wide'
 ) # creates page config file for streamlit web app
 
-st.sidebar.header('Please filter here:') # creates sidebar to select which measures to display, with default selection being 'temp', 'wind_speed', 'precipitation'
+st.sidebar.header('Change settings here:') # creates sidebar to select which measures to display, with default selection being 'temp', 'wind_speed', 'precipitation'
 select_measures = st.sidebar.multiselect(
     'Select measure to show',
     options=df['variable'].unique(),
     default=['temp', 'wind_speed', 'precipitation']
 )
 
-st.sidebar.header('Please filter here:') # creates sidebar to select city
-select_city = st.sidebar.multiselect(
-    'Select measure to show',
-    options=df['city'].unique(),
-    default=df['city'].unique()
-)
+location = st.sidebar.text_input(
+    'Type another city to show',
+    location
+) # creates sidebar to select city
 
-df_selection = df.query("variable == @select_measures & city == @select_city") # to filter table results using fields in the left-hand pane 
+df_selection = df.query("variable == @select_measures & city == @location") # to filter table results using fields in the left-hand pane 
 #st.dataframe(df_selection) # show filtered data as DataFrame on streamlit page
 
 # Creates bar chart
