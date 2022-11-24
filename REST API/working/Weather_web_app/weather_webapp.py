@@ -103,6 +103,7 @@ df = pd.DataFrame({'city': city, 'temp': temp, 'feels_like': feels_like, 'temp_m
 df = pd.melt(df, id_vars=['city', 'type', 'date_time', 'sunrise','sunset'], value_vars=['temp', 'feels_like', 'temp_min', 'temp_max', 'wind_speed', 'precipitation']) # gather columns with numbers into rows and show their results under new 'value' column. This is in order to be able to better chart the data.
 
 
+
 # pulls summary weather & timezone data to later show in table in streamlit web app
 
 # shows time in different timezones (NYC & London)
