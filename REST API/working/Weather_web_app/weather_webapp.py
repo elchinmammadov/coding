@@ -30,11 +30,6 @@ import time # to run python code every 10 minutes using a timer
 
 
 
-st.set_page_config(page_title='Weather forecast', 
-                    page_icon=":bar_chart:", 
-                    layout='wide'
-) # creates page config file for streamlit web app
-
 # Declare variables
 location = 'St Albans'
 #location = input("Enter city name: ") # asks user to enter city name
@@ -43,18 +38,7 @@ full_api_link_forecast = "https://api.openweathermap.org/data/2.5/forecast?q="+l
 #filename = 'weather.csv'
 
 # Create empty lists to populate with values later on
-temp = []
-feels_like = []
-temp_min = []
-temp_max = []
-weather_desc = []
-wind_speed = []
-precipitation = []
-city = []
-date_time = []
-sunrise = []
-sunset = []
-type = []
+temp, feels_like, temp_min, temp_max, weather_desc, wind_speed, precipitation, city, date_time, sunrise, sunset, type = ([],[],[],[],[],[],[],[],[],[],[],[])
 
 def download_API_function(full_api_link): # function to download weather data via API
     api_link = requests.get(full_api_link)
@@ -118,7 +102,8 @@ else:
 df = pd.DataFrame({'city': city, 'temp': temp, 'feels_like': feels_like, 'temp_min': temp_min, 'temp_max': temp_max, 'wind_speed': wind_speed, 'precipitation': precipitation, 'date_time': date_time, 'sunrise': sunrise, 'sunset': sunset, 'type': type}) # creates empty DataFrame and populates it with data from lists
 df = pd.melt(df, id_vars=['city', 'type', 'date_time', 'sunrise','sunset'], value_vars=['temp', 'feels_like', 'temp_min', 'temp_max', 'wind_speed', 'precipitation']) # gather columns with numbers into rows and show their results under new 'value' column. This is in order to be able to better chart the data.
 
-# pulls summary weather & timezone data to show in table
+
+# pulls summary weather & timezone data to later show in table in streamlit web app
 
 # shows time in different timezones (NYC & London)
 tz_NY = pytz.timezone('America/New_York') 
@@ -145,11 +130,16 @@ curr_df = curr_df.rename(columns={0: "Values"}) # renames '0' column to 'Values'
 # Streamlit script to turn this python script into wewb app
 # instructions here: https://www.youtube.com/watch?v=Sb0A9i6d320
 
-st.sidebar.header('Please filter here:') # creates sidebar to select which measures to display
+st.set_page_config(page_title='Weather forecast', 
+                    page_icon=":bar_chart:", 
+                    layout='wide'
+) # creates page config file for streamlit web app
+
+st.sidebar.header('Please filter here:') # creates sidebar to select which measures to display, with default selection being 'temp', 'wind_speed', 'precipitation'
 select_measures = st.sidebar.multiselect(
     'Select measure to show',
     options=df['variable'].unique(),
-    default=df['variable'].unique()
+    default=['temp', 'wind_speed', 'precipitation']
 )
 
 st.sidebar.header('Please filter here:') # creates sidebar to select city
@@ -160,7 +150,7 @@ select_city = st.sidebar.multiselect(
 )
 
 df_selection = df.query("variable == @select_measures & city == @select_city") # to filter table results using fields in the left-hand pane 
-#st.dataframe(df_selection) # show filtered data on streamlit page
+#st.dataframe(df_selection) # show filtered data as DataFrame on streamlit page
 
 # Creates bar chart
 altchart = alt.Chart(df_selection, title=location).mark_line().encode(
@@ -168,9 +158,8 @@ altchart = alt.Chart(df_selection, title=location).mark_line().encode(
     #x=alt.X('monthdatehours(date_time):T'),
     y='value',
     color='variable'
-).interactive() # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
+).interactive(bind_y=False) # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
 # ).interactive().transform_filter({'field': 'variable', 'oneOf': ['temp', 'wind_speed', 'precipitation']}) # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
-
 
 # creates two columns and shows chart and table in each of those columns
 left_column, right_column = st.columns([2,1])
