@@ -149,7 +149,7 @@ select_measures = st.sidebar.multiselect(
     default=['temp', 'wind_speed', 'precipitation']
 )
 
-select_location = st.sidebar.selectbox("Which city?", ('St Albans', 'London', 'Baku', 'New York', 'Dubai', 'Other city'), 1) # prompts user to select a city, to show the weather for. By default, 'St Albans' is selected. 
+select_location = st.sidebar.selectbox("Which city?", ('St Albans', 'London', 'New York', 'Baku', 'Dubai', 'Harare', 'Other city'), 0) # prompts user to select a city, to show the weather for. By default, 'St Albans' is selected. 
 
 if select_location == 'Other city':
     location = st.sidebar.text_input(
@@ -161,13 +161,13 @@ else:
     api_result = api_request(location=select_location)
     df = api_result[0]
     curr_df = api_result[1]
-    location = select_location
+    #location = select_location
     # TODO Data doesn't refresh when I change city. Try fixing it with streamlit session states, callbacks and st.experimental_rerun(). https://discuss.streamlit.io/t/how-to-use-st-session-state-to-create-dataframe-from-user-entry/27315/3
-    df_selection = df.query("variable == @select_measures & city == @location") # to filter table results using fields in the left-hand pane 
+    df_selection = df.query("variable == @select_measures & city == @select_location") # to filter table results using fields in the left-hand pane 
     #st.dataframe(df_selection) # show filtered data as DataFrame on streamlit page
 
     # Creates bar chart
-    altchart = alt.Chart(df_selection, title=location).mark_line().encode(
+    altchart = alt.Chart(df_selection, title=select_location).mark_line().encode(
         x=alt.X('date_time:T', axis=alt.Axis(format='%a %H:%M')),
         #x=alt.X('monthdatehours(date_time):T'),
         y='value',
