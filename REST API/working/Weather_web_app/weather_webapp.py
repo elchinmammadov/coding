@@ -184,7 +184,7 @@ if select_location == 'Other (please specify)':
         select_location = location
         create_chart_table(location=select_location) # launches function to re-download API data and create a chart and a table based on the city selected through 'select_location' variable
 else:
-    create_chart_table(location=select_location)
+    create_chart_table(location=select_location) # launches 
 
 st.markdown('---') # to draw solid line on streamlit page
 hide_st_style = """
@@ -196,3 +196,5 @@ hide_st_style = """
     """
 st.markdown(hide_st_style, unsafe_allow_html=True) # hides streamlit icons and logo from our web app
 
+#TODO add functionality to show either clock or table (the table is already made) alongside the weather chart
+#TODO add functionality at the end of the code to wait for X minutes and then refresh API by calling     create_chart_table(select_location)
