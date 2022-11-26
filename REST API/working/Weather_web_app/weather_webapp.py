@@ -149,30 +149,44 @@ select_measures = st.sidebar.multiselect(
     default=['temp', 'wind_speed', 'precipitation']
 )
 
-select_city = st.sidebar.text_input(
-    'Type another city to show',
-    'St Albans'
-) # creates sidebar to select city
-location = select_city # changes 'location' varialble to whatever is selected in 'select_city' options
-# TODO Data doesn't refresh when I change city. Try fixing it with streamlit session states, callbacks and st.experimental_rerun(). https://discuss.streamlit.io/t/how-to-use-st-session-state-to-create-dataframe-from-user-entry/27315/3
-df_selection = df.query("variable == @select_measures & city == @select_city") # to filter table results using fields in the left-hand pane 
-#st.dataframe(df_selection) # show filtered data as DataFrame on streamlit page
+# function to re-download API data and create a chart and a table based on the city selected through 'select_location' variable below
+def create_chart_table(location):
 
-# Creates bar chart
-altchart = alt.Chart(df_selection, title=location).mark_line().encode(
-    x=alt.X('date_time:T', axis=alt.Axis(format='%a %H:%M')),
-    #x=alt.X('monthdatehours(date_time):T'),
-    y='value',
-    color='variable'
-).interactive(bind_y=False) # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
-# ).interactive().transform_filter({'field': 'variable', 'oneOf': ['temp', 'wind_speed', 'precipitation']}) # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
+    api_result = api_request(location=location)
+    df = api_result[0]
+    curr_df = api_result[1]
 
-# creates two columns and shows chart and table in each of those columns
-left_column, right_column = st.columns([2,1])
-left_column.altair_chart(altchart, use_container_width=True) # shows filtered altair data chart on streamlit page and resizes it to fit the page
-right_column.dataframe(curr_df, use_container_width=True) # shows current time, weather and other data as Pandas DataFrame table on streamlit page and resizes it to fit the page
-# st.altair_chart(altchart, use_container_width=True) # shows filtered altair data on streamlit page and resizes it to fit the page
-# st.dataframe(curr_df, use_container_width=True) # shows current time, weather and other data as Pandas DataFrame table on streamlit page and resizes it to fit the page
+    df_selection = df.query("variable == @select_measures & city == @location") # to filter table results using fields in the left-hand pane 
+    #st.dataframe(df_selection) # show filtered data as DataFrame on streamlit page
+    # Creates bar chart
+    altchart = alt.Chart(df_selection, title=location).mark_line().encode(
+        x=alt.X('date_time:T', axis=alt.Axis(format='%a %H:%M')),
+        #x=alt.X('monthdatehours(date_time):T'),
+        y='value',
+        color='variable'
+    ).interactive(bind_y=False) # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
+    # ).interactive().transform_filter({'field': 'variable', 'oneOf': ['temp', 'wind_speed', 'precipitation']}) # interactive chart which you can move around and zoom in/out. It shows XY axis line chart, with 'date_time' in X axis in a hours+day+month+year format, 'value' in Y axis for rows where 'value' fields are either 'temp' or 'wind_speed'
+
+    # creates two columns and shows chart and table in each of those columns
+    left_column, right_column = st.columns([2,1])
+    left_column.altair_chart(altchart, use_container_width=True) # shows filtered altair data chart on streamlit page and resizes it to fit the page
+    right_column.dataframe(curr_df, use_container_width=True) # shows current time, weather and other data as Pandas DataFrame table on streamlit page and resizes it to fit the page
+    # st.altair_chart(altchart, use_container_width=True) # shows filtered altair data on streamlit page and resizes it to fit the page
+    # st.dataframe(curr_df, use_container_width=True) # shows current time, weather and other data as Pandas DataFrame table on streamlit page and resizes it to fit the page
+
+
+select_location = st.sidebar.selectbox("Which city?", ('St Albans', 'London', 'New York', 'Baku', 'Dubai', 'Harare', 'Other (please specify)'), 0) # prompts user to select a city, to show the weather for. By default, 'St Albans' is selected. 
+
+if select_location == 'Other (please specify)':
+    location = st.sidebar.text_input(
+        'Type another city to show'
+    ) # creates sidebar to type a city that's not in the list
+    if len(location) > 0:
+        select_location = location
+        create_chart_table(location=select_location) # launches function to re-download API data and create a chart and a table based on the city selected through 'select_location' variable
+else:
+    create_chart_table(location=select_location)
+
 st.markdown('---') # to draw solid line on streamlit page
 hide_st_style = """
     <style>
