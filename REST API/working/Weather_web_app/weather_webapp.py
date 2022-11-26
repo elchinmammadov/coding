@@ -30,7 +30,7 @@ import time # to run python code every 10 minutes using a timer
 
 
 # Declares variable for default city name
-location = 'St Albans'
+#location = 'St Albans'
 
 def api_request(location): # function to download weather data via API. The function takes 'location' as input and returns 'curr_df' and 'df' DataFrames as output
 
@@ -129,7 +129,7 @@ def api_request(location): # function to download weather data via API. The func
 
 
 # runs 'api_request' function that takes 'location' as input and returns 'curr_df' and 'df' DataFrames as output. These DataFrames will later be used in streamlit web app
-api_result = api_request(location=location)
+api_result = api_request(location='St Albans')
 df = api_result[0]
 curr_df = api_result[1]
 
@@ -151,10 +151,10 @@ select_measures = st.sidebar.multiselect(
 
 select_city = st.sidebar.text_input(
     'Type another city to show',
-    location
+    'St Albans'
 ) # creates sidebar to select city
 location = select_city # changes 'location' varialble to whatever is selected in 'select_city' options
-
+# TODO Data doesn't refresh when I change city. Try fixing it with streamlit session states, callbacks and st.experimental_rerun(). https://discuss.streamlit.io/t/how-to-use-st-session-state-to-create-dataframe-from-user-entry/27315/3
 df_selection = df.query("variable == @select_measures & city == @select_city") # to filter table results using fields in the left-hand pane 
 #st.dataframe(df_selection) # show filtered data as DataFrame on streamlit page
 
