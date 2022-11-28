@@ -196,5 +196,10 @@ hide_st_style = """
     """
 st.markdown(hide_st_style, unsafe_allow_html=True) # hides streamlit icons and logo from our web app
 
+
 #TODO add functionality to show either clock or table (the table is already made) alongside the weather chart
-#TODO add functionality at the end of the code to wait for X minutes and then refresh API by calling     create_chart_table(select_location)
+
+#TODO add functionality at the end of the code to wait for X minutes and then refresh API by calling     create_chart_table(select_location)  Try using session states and callbacks explained heer: https://www.youtube.com/watch?v=5l9COMQ3acc&list=PLqJNvqpHr6xOSPYv_xPS32He2sSOE2A7C&index=2
+# while(True):
+#     create_chart_table(select_location)
+#     time.sleep(10)
