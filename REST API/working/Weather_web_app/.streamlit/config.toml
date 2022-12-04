@@ -1,4 +1,8 @@
 [theme]
+
+# Set default theme (light or dark)
+base = "dark"
+
 # Primary accent color for interactive elements.
 primaryColor = "#E694FF"
 
