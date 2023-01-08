@@ -1,0 +1,2 @@
+entsoe_py==0.4.2
+pandas==1.3.5
