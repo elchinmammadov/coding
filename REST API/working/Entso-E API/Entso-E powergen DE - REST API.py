@@ -6,8 +6,12 @@
 from entsoe import EntsoePandasClient # to pull Entso-E data thru API
 import pandas as pd
 import os # to check if csv file already exists before exporting the data into csv. Also to delete CSV file 
+from dotenv import load_dotenv # I need this to hide API key
+import os # I need this to hide API key
 
-client = EntsoePandasClient(api_key='3007ecf7-5df6-4b95-80ae-7e40f26a0224') # enters my API token: 3007ecf7-5df6-4b95-80ae-7e40f26a0224
+# I need this to hide API key
+load_dotenv()
+client = EntsoePandasClient(api_key=os.getenv('api_key')) # enters my API token
 
 start = pd.Timestamp('20211227', tz='Europe/Brussels') # start date
 end = pd.Timestamp('20211228', tz='Europe/Brussels') # end date
