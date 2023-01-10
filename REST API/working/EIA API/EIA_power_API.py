@@ -1,13 +1,19 @@
 # Daily net generation by balancing authority and energy source. Source: Form EIA-930 Product: Hourly Electric Grid Monitor. Data link: https://api.eia.gov/v2/electricity/rto/daily-fuel-type-data/data/?frequency=daily&data[0]=value&facets[respondent][]=US48&facets[timezone][]=Eastern&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=5000
 # Daily demand and net generation by balancing authority. Source: Form EIA-930 Product: Hourly Electric Grid Monitor. Data link: https://api.eia.gov/v2/electricity/rto/daily-region-data/data/?frequency=daily&data[0]=value&facets[respondent][]=US48&facets[timezone][]=Eastern&facets[type][]=D&facets[type][]=NG&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=5000
 
-# TODO: hide API key
+# TODO: add code from work PC to format and chart the data
 
 import pandas as pd
 import requests # to request/download data via API
 from datetime import datetime, timedelta # to break up start & end dates into smaller monthly intervals
 from dateutil import rrule # to break up start & end dates into smaller monthly intervals
 from dateutil.relativedelta import relativedelta # to break up start & end dates into smaller monthly intervals
+from dotenv import load_dotenv # I need this to hide API key
+import os # I need this to hide API key
+
+# I need this to hide API key
+load_dotenv()
+api_key = os.getenv('api_key')
 
 # declare variables
 start_date = datetime(2019, 11, 1) # start date for downloading data
@@ -15,15 +21,14 @@ end_date = datetime(2022, 1, 1) # end date for downloading data
 startDates = [] # list to store start dates
 endDates = [] # list to store end dates
 list_data = [] # list to store data downloaded via API in json format
-api_key = 'q6uV6bK4CBECvdpqyeQ6CvldEcQazws5pSJqaw6D'
 
 def API_function(start_date, end_date, list_data):
     # Download raw data using API
     URL = 'https://api.eia.gov/v2/electricity/rto/daily-fuel-type-data/data/?api_key=' + api_key + '&frequency=daily&data[0]=value&facets[respondent][]=US48&facets[timezone][]=Eastern&start=' + start_date.strftime('%Y-%m-%d') + '&end=' + end_date.strftime('%Y-%m-%d') + '&sort[0][column]=period&sort[0][direction]=desc&offset=0&out=json' # convert datetime format (e.g. '2019, 1, 1') to string format (e.g. '2019-01-01') for start and end dates so that these can be understood by this API request
     #URL = 'https://api.eia.gov/v2/electricity/rto/daily-region-data/data/?api_key=' + api_key + '&frequency=daily&data[0]=value&facets[respondent][]=US48&facets[timezone][]=Eastern&facets[type][]=D&facets[type][]=NG&sort[0][column]=period&start=' + start_date.strftime('%Y-%m-%d') + '&end=' + end_date.strftime('%Y-%m-%d') + '&sort[0][direction]=desc&offset=0&out=json' # convert datetime format (e.g. '2019, 1, 1') to string format (e.g. '2019-01-01') for start and end dates so that these can be understood by this API request
-    #URL = 'https://api.eia.gov/series/?series_id=PET.MCRRIP12.M&api_key=q6uV6bK4CBECvdpqyeQ6CvldEcQazws5pSJqaw6D&out=json'
-    #URL = 'http://api.eia.gov/category/?api_key=q6uV6bK4CBECvdpqyeQ6CvldEcQazws5pSJqaw6D&category_id=3&out=json'
-    #URL = 'https://api.eia.gov/v2/electricity/retail-sales&api_key=q6uV6bK4CBECvdpqyeQ6CvldEcQazws5pSJqaw6D&out=json'
+    #URL = 'https://api.eia.gov/series/?series_id=PET.MCRRIP12.M&api_key=' + api_key + '&out=json'
+    #URL = 'http://api.eia.gov/category/?api_key=' + api_key + '&category_id=3&out=json'
+    #URL = 'https://api.eia.gov/v2/electricity/retail-sales&api_key=' + api_key + '&out=json'
     headers = {'Accept-Encoding': 'identity'}
     r = requests.get(URL, headers=headers)
     json_data = r.json()
