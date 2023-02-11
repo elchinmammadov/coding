@@ -1,3 +1,19 @@
+import customtkinter as ctk
+ctk.set_appearance_mode("dark") # default
+ctk.set_default_color_theme("dark-blue")
+
+root = ctk.CTk()
+root.geometry("500x500")
+
+def login():
+    print("Test")
+
+frame = ctk.CTkFrame(master = root)
+frame.pack(pady=20, padx=60, fill="both", expand=True)
+
+
+
+
 # capture user inputs
 author1 = input("enter author's full name (name and surname)")
 author2 = input("enter author's full name (name and surname)")
