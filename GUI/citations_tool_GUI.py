@@ -16,9 +16,10 @@ frame.pack(pady=20, padx=60, fill="both", expand=True)
 
 # create text fields & buttons within GUI
 label = ctk.CTkLabel(master=frame, text="Citation generator", font=("Roboto", 24)) # create label
-#label.grid(row=0, column=0, columnspan=2, pady=10)
+#label.grid(row=0, column=0, columnspan=2, pady=12, padx=10)
 label.pack(pady=12, padx=10) # show label
 author1gui = ctk.CTkEntry(master=frame, placeholder_text="Author 1 name and surname (required)")
+#author1gui.grid(row=0, column=1, pady=12, padx=10)
 author1gui.pack(pady=12, padx=10)
 author2gui = ctk.CTkEntry(master=frame, placeholder_text="Author 2 name and surname (required)")
 author2gui.pack(pady=12, padx=10)
