@@ -36,7 +36,7 @@ monthgui = ctk.CTkEntry(master=frame, placeholder_text="Month (optional)")
 monthgui.pack(pady=12, padx=10)
 daygui = ctk.CTkEntry(master=frame, placeholder_text="Day (optional)")
 daygui.pack(pady=12, padx=10)
-checkbox = ctk.CTkCheckBox(master=frame, text="All authors in one line")
+checkbox = ctk.CTkCheckBox(master=frame, text="All authors in one line", onvalue="Yes", offvalue="No")
 checkbox.pack(pady=12, padx=10)
 
 # function to check if all required fields are filled in
@@ -50,62 +50,64 @@ def validation_func(dict):
 
 # function to change month number to month name
 def month_func(dict):
-    if dict['month'] == 1:
+    if dict['month'] == "":
+        dict['month_name'] = ""
+    elif int(dict['month']) == 1:
         if dict['day'] == "":
             dict['month_name'] = "January"
         elif dict['day'] != 0:
             dict['month_name'] = "Jan."
-    elif dict['month'] == 2:
+    elif int(dict['month']) == 2:
         if dict['day'] == "":
             dict['month_name'] = "February"
         elif dict['day'] != 0:
             dict['month_name'] = "Feb."
-    elif dict['month'] == 3:
+    elif int(dict['month']) == 3:
         if dict['day'] == "":
             dict['month_name'] = "March"
         elif dict['day'] != 0:
             dict['month_name'] = "Mar."
-    elif dict['month'] == 4:
+    elif int(dict['month']) == 4:
         if dict['day'] == "":
             dict['month_name'] = "April"
         elif dict['day'] != 0:
             dict['month_name'] = "Apr."
-    elif dict['month'] == 5:
+    elif int(dict['month']) == 5:
         if dict['day'] == "":
             dict['month_name'] = "May"
         elif dict['day'] != 0:
             dict['month_name'] = "May"
-    elif dict['month'] == 6:
+    elif int(dict['month']) == 6:
         if dict['day'] == "":
             dict['month_name'] = "June"
         elif dict['day'] != 0:
             dict['month_name'] = "Jun."
-    elif dict['month'] == 7:
+    elif int(dict['month']) == 7:
         if dict['day'] == "":
             dict['month_name'] = "July"
         elif dict['day'] != 0:
             dict['month_name'] = "Jul."
-    elif dict['month'] == 8:
+    elif int(dict['month']) == 8:
         if dict['day'] == "":
             dict['month_name'] = "August"
         elif dict['day'] != 0:
             dict['month_name'] = "Aug."
-    elif dict['month'] == 9:
+    elif int(dict['month']) == 9:
         if dict['day'] == "":
             dict['month_name'] = "September"
         elif dict['day'] != 0:
             dict['month_name'] = "Sep."
-    elif dict['month'] == 10:
+    elif int(dict['month']) == 10:
         if dict['day'] == "":
             dict['month_name'] = "October"
         elif dict['day'] != 0:
             dict['month_name'] = "Oct."
-    elif dict['month'] == 11:
+    elif int(dict['month']) == 11:
         if dict['day'] == "":
             dict['month_name'] = "November"
         elif dict['day'] != 0:
             dict['month_name'] = "Nov."
-    elif dict['month'] == 12:
+    elif int(dict['month']) == 12:
         if dict['day'] == "":
             dict['month_name'] = "December"
         elif dict['day'] != 0:
@@ -114,13 +116,32 @@ def month_func(dict):
         dict['month_name'] = "error"
     return dict
 
+# function is only activated when user selects "Yes" in multi_authors tickbox in customtkinter GUI. This function won't work in here.
+def multi_author_selector_func(dict):
+    dict['multi_authors'] == "Yes"
+    return dict
+
+# when users input multiple names into 'author1' field, this funciton will split them into individual authors, then save result into dictionary under dict['author']
+def multi_author_func(dict):
+    if dict['multi_authors'] == "Yes":
+        authors = re.split(r', and | and | & | , |, |,', str(dict['author1'])) # splits names using multiple delimiters (i.e. ' and ' ' & ' ' , ' etc)
+        author = ""
+        # swaps around names and surnames, then saves result into dictionary under dict['author']
+        for x in authors:
+            author = author + str(x).split(" ")[1] + ", " + str(x).split(" ")[0] + ", "
+        dict['author'] = author[:-2] # remove last 2 characters from the 'author' string, then save it in 'dict' dictionary under 'author' key 
+    return dict
+
 # function to loop through all authors, same them as surname followed by first name, then save to dict dictionary as 'author' key
 def author_func(dict):
-    author = ""
-    for x in ['author1', 'author2', 'author3', 'author4']:
-        if dict[x] != "":
-            author = author + str(dict[x]).split(" ")[1] + ", " + str(dict[x]).split(" ")[0] + ", "
-    dict['author'] = author[:-2] # remove last 2 characters from the string, then save it in 'dict' dictionary under 'author' key 
+    if dict['multi_authors'] == "Yes": # if multiple authors are entered in dict['author1'], then launches multi_author_func to parse those authors
+        dict = multi_author_func(dict)
+    else: # if a single author is entered in dict['author1'], then loops through all authors
+        author = ""
+        for x in ['author1', 'author2', 'author3', 'author4']:
+            if dict[x] != "":
+                author = author + str(dict[x]).split(" ")[1] + ", " + str(dict[x]).split(" ")[0] + ", "
+        dict['author'] = author[:-2] # remove last 2 characters from the 'author' string, then save it in 'dict' dictionary under 'author' key 
     return dict
 
 # function to combine all user inputs and return it as a citation under 'combined_list' key in 'dict' dictionary
@@ -128,6 +149,7 @@ def combine_func(dict):
     combined_list = [] # create a list to store author, title, etc
     combined_list.append(dict['author'] + ". ")
     combined_list.append('"' + dict['title'] + '." ')
+    combined_list.append(dict['organisation'] + ', ')
     if dict['day'] != "":
         combined_list.append(dict['month_name'] + " ")
     else:
@@ -135,6 +157,7 @@ def combine_func(dict):
     combined_list.append(dict['day'])
     combined_list.append(", " + dict['year'] + ".")
     dict['combined_list'] = "".join(combined_list) # convert list to string
+    dict['combined_list'] = str(dict['combined_list']).replace(", ,", ",") # fixes issues where string contains ', ,' which happens if user doesn't enter month and day
     return dict
 
 def copy_to_clipboard(dict):
@@ -149,8 +172,9 @@ def login(dict):
     dict['title'] = titlegui.get()
     dict['organisation'] = organisationgui.get()
     dict['year'] = str(yeargui.get())
-    dict['month'] = int(monthgui.get())
+    dict['month'] = str(monthgui.get())
     dict['day'] = str(daygui.get())
+    dict['multi_authors'] = str(checkbox.get())
     # run functions
     dict = validation_func(dict) # checks if all required fields are filled in
     dict = month_func(dict) # adds letter name of the month to the dictionary
