@@ -1,5 +1,6 @@
 import customtkinter as ctk # to build GUI
 import pyperclip as pc # to copy formatted citation to clipboard
+import re # to split string using multiple delimiters
 
 dict = {} # create an empty dictionary to store and manipulate user inputs (author, title, etc.)
 
