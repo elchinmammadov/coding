@@ -15,9 +15,9 @@ frame = ctk.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
 # create text fields & buttons within GUI
-label = ctk.CTkLabel(master=frame, text="Citation generator", font=("Roboto", 24))
+label = ctk.CTkLabel(master=frame, text="Citation generator", font=("Roboto", 24)) # create label
 #label.grid(row=0, column=0, columnspan=2, pady=10)
-label.pack(pady=12, padx=10)
+label.pack(pady=12, padx=10) # show label
 author1gui = ctk.CTkEntry(master=frame, placeholder_text="Author 1 name and surname (required)")
 author1gui.pack(pady=12, padx=10)
 author2gui = ctk.CTkEntry(master=frame, placeholder_text="Author 2 name and surname (required)")
@@ -182,7 +182,7 @@ def login(dict):
     output = ctk.CTkLabel(master=frame, text='Your formatted citation has been copied to clipboard.', font=("Roboto", 10))
     output.pack(pady=1, padx=1)
 
-button = ctk.CTkButton(master=frame, text="Submit", command=lambda: login(dict))
+button = ctk.CTkButton(master=frame, text="Submit", command=lambda: login(dict)) # Submit button
 button.pack(pady=12, padx=10)
 
 root.mainloop() # run the main customtkinter GUI loop endlessly
