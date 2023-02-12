@@ -16,29 +16,29 @@ frame.pack(pady=20, padx=60, fill="both", expand=True)
 
 # create text fields & buttons within GUI
 label = ctk.CTkLabel(master=frame, text="Citation generator", font=("Roboto", 24)) # create label
-#label.grid(row=0, column=0, columnspan=2, pady=12, padx=10)
-label.pack(pady=12, padx=10) # show label
+#label.grid(row=0, column=0, columnspan=2, pady=3, padx=3)
+label.pack(pady=3, padx=3) # show label
 author1gui = ctk.CTkEntry(master=frame, placeholder_text="Author 1 name and surname (required)")
-#author1gui.grid(row=0, column=1, pady=12, padx=10)
-author1gui.pack(pady=12, padx=10)
+#author1gui.grid(row=0, column=1, pady=3, padx=3)
+author1gui.pack(pady=3, padx=3)
 author2gui = ctk.CTkEntry(master=frame, placeholder_text="Author 2 name and surname (required)")
-author2gui.pack(pady=12, padx=10)
+author2gui.pack(pady=3, padx=3)
 author3gui = ctk.CTkEntry(master=frame, placeholder_text="Author 3 name and surname (required)")
-author3gui.pack(pady=12, padx=10)
+author3gui.pack(pady=3, padx=3)
 author4gui = ctk.CTkEntry(master=frame, placeholder_text="Author 4 name and surname (required)")
-author4gui.pack(pady=12, padx=10)
+author4gui.pack(pady=3, padx=3)
 titlegui = ctk.CTkEntry(master=frame, placeholder_text="Title (required)")
-titlegui.pack(pady=12, padx=10)
+titlegui.pack(pady=3, padx=3)
 organisationgui = ctk.CTkEntry(master=frame, placeholder_text="Organisation (required)")
-organisationgui.pack(pady=12, padx=10)
+organisationgui.pack(pady=3, padx=3)
 yeargui = ctk.CTkEntry(master=frame, placeholder_text="Year of publication (required)")
-yeargui.pack(pady=12, padx=10)
+yeargui.pack(pady=3, padx=3)
 monthgui = ctk.CTkEntry(master=frame, placeholder_text="Month (optional)")
-monthgui.pack(pady=12, padx=10)
+monthgui.pack(pady=3, padx=3)
 daygui = ctk.CTkEntry(master=frame, placeholder_text="Day (optional)")
-daygui.pack(pady=12, padx=10)
+daygui.pack(pady=3, padx=3)
 checkbox = ctk.CTkCheckBox(master=frame, text="All authors in one line", onvalue="Yes", offvalue="No")
-checkbox.pack(pady=12, padx=10)
+checkbox.pack(pady=3, padx=3)
 
 # function to check if all required fields are filled in
 def validation_func(dict):
@@ -181,10 +181,13 @@ def login(dict):
     output = ctk.CTkLabel(master=frame, text=dict['combined_list'], font=("Roboto", 10))
     output.pack(pady=4, padx=3)
     output = ctk.CTkLabel(master=frame, text='Your formatted citation has been copied to clipboard.', font=("Roboto", 10))
-    output.pack(pady=1, padx=1)
+    output.pack(pady=1, padx=3)
 
-button = ctk.CTkButton(master=frame, text="Submit", command=lambda: login(dict)) # Submit button
-button.pack(pady=12, padx=10)
+submit_button = ctk.CTkButton(master=frame, text="Submit", command=lambda: login(dict)) # Submit button
+submit_button.pack(pady=3, padx=3)
+clear_button = ctk.CTkButton(master=frame, text="Clear", command=lambda: login(dict)) # Clear button
+clear_button.pack(pady=3, padx=3)
+
 
 root.mainloop() # run the main customtkinter GUI loop endlessly
 
