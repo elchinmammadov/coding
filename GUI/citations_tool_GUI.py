@@ -1,88 +1,114 @@
-import customtkinter as ctk
+import customtkinter as ctk # to build GUI
+import pyperclip as pc # to copy formatted citation to clipboard
 
-# build the GUI
+dict = {} # create an empty dictionary to store and manipulate user inputs (author, title, etc.)
 
+# set GUI color settings
 ctk.set_appearance_mode("default") # or choose 'dark' or 'light'
 ctk.set_default_color_theme("dark-blue")
 
+# set GUI size
 root = ctk.CTk()
 #root.geometry("500x700")
-
 frame = ctk.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
+# create text fields & buttons within GUI
 label = ctk.CTkLabel(master=frame, text="Citation generator", font=("Roboto", 24))
 label.grid(row=0, column=0, columnspan=2, pady=10)
 label.pack(pady=12, padx=10)
-author1gui = ctk.CTkEntry(master=frame, placeholder_text="Author 1 name and surname)")
+author1gui = ctk.CTkEntry(master=frame, placeholder_text="Author 1 name and surname (required)")
 author1gui.pack(pady=12, padx=10)
-author2gui = ctk.CTkEntry(master=frame, placeholder_text="Author 2 name and surname)")
+author2gui = ctk.CTkEntry(master=frame, placeholder_text="Author 2 name and surname (required)")
 author2gui.pack(pady=12, padx=10)
-author3gui = ctk.CTkEntry(master=frame, placeholder_text="Author 3 name and surname)")
+author3gui = ctk.CTkEntry(master=frame, placeholder_text="Author 3 name and surname (required)")
 author3gui.pack(pady=12, padx=10)
-author4gui = ctk.CTkEntry(master=frame, placeholder_text="Author 4 name and surname)")
+author4gui = ctk.CTkEntry(master=frame, placeholder_text="Author 4 name and surname (required)")
 author4gui.pack(pady=12, padx=10)
-titlegui = ctk.CTkEntry(master=frame, placeholder_text="Title")
+titlegui = ctk.CTkEntry(master=frame, placeholder_text="Title (required)")
 titlegui.pack(pady=12, padx=10)
-organisationgui = ctk.CTkEntry(master=frame, placeholder_text="Organisation")
+organisationgui = ctk.CTkEntry(master=frame, placeholder_text="Organisation (required)")
 organisationgui.pack(pady=12, padx=10)
-yeargui = ctk.CTkEntry(master=frame, placeholder_text="Year of publication")
+yeargui = ctk.CTkEntry(master=frame, placeholder_text="Year of publication (required)")
 yeargui.pack(pady=12, padx=10)
-monthgui = ctk.CTkEntry(master=frame, placeholder_text="Month")
+monthgui = ctk.CTkEntry(master=frame, placeholder_text="Month (optional)")
 monthgui.pack(pady=12, padx=10)
 daygui = ctk.CTkEntry(master=frame, placeholder_text="Day (optional)")
 daygui.pack(pady=12, padx=10)
 checkbox = ctk.CTkCheckBox(master=frame, text="All authors in one line")
 checkbox.pack(pady=12, padx=10)
 
-dict = {} # create an empty dictionary to store and manipulate user inputs (author, title, etc.)
-
-def login(dict):
-    # save values inputted by user as variables
-    dict['author1'] = author1gui.get()
-    dict['author2'] = author2gui.get()
-    dict['author3'] = author3gui.get()
-    dict['author4'] = author4gui.get()
-    dict['title'] = titlegui.get()
-    dict['organisation'] = organisationgui.get()
-    dict['year'] = str(yeargui.get())
-    dict['month'] = int(monthgui.get())
-    dict['day'] = str(daygui.get())
-    # run functions
-    dict = month_func(dict) # adds letter name of the month to the dictionary
-    dict = author_func(dict) # combines all authors into a single string with surname followed by first name
-    dict = combine_func(dict) # combines all user inputs into a single string to show as a citation
-    # output final result
-    output = ctk.CTkLabel(master=frame, text=dict['combined_list'], font=("Roboto", 10))
-    output.pack(pady=12, padx=10)
-
+# function to check if all required fields are filled in
+def validation_func(dict):
+    while any([dict['author1'] == "", dict['title'] == "", dict['organisation'] == "", dict['year'] == ""]):
+        for x in ['author1', 'title', 'organisation', 'year']:
+            if dict[x] == "":
+                print("Please fill in all required fields.")
+                dict[x] = str(input("Please enter " + x + ": "))
+    return dict
 
 # function to change month number to month name
 def month_func(dict):
     if dict['month'] == 1:
-        dict['month_name'] = "Jan."
+        if dict['day'] == "":
+            dict['month_name'] = "January"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Jan."
     elif dict['month'] == 2:
-        dict['month_name'] = "Feb."
+        if dict['day'] == "":
+            dict['month_name'] = "February"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Feb."
     elif dict['month'] == 3:
-        dict['month_name'] = "Mar."
+        if dict['day'] == "":
+            dict['month_name'] = "March"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Mar."
     elif dict['month'] == 4:
-        dict['month_name'] = "Apr."
+        if dict['day'] == "":
+            dict['month_name'] = "April"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Apr."
     elif dict['month'] == 5:
-        dict['month_name'] = "May."
+        if dict['day'] == "":
+            dict['month_name'] = "May"
+        elif dict['day'] != 0:
+            dict['month_name'] = "May"
     elif dict['month'] == 6:
-        dict['month_name'] = "Jun."
+        if dict['day'] == "":
+            dict['month_name'] = "June"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Jun."
     elif dict['month'] == 7:
-        dict['month_name'] = "Jul."
+        if dict['day'] == "":
+            dict['month_name'] = "July"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Jul."
     elif dict['month'] == 8:
-        dict['month_name'] = "Aug."
+        if dict['day'] == "":
+            dict['month_name'] = "August"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Aug."
     elif dict['month'] == 9:
-        dict['month_name'] = "Sep."
+        if dict['day'] == "":
+            dict['month_name'] = "September"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Sep."
     elif dict['month'] == 10:
-        dict['month_name'] = "Oct."
-    elif dict['month_name'] == 11:
-        dict['month'] = "Nov."
-    elif dict['month_name'] == 12:
-        dict['month'] = "Dec."
+        if dict['day'] == "":
+            dict['month_name'] = "October"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Oct."
+    elif dict['month'] == 11:
+        if dict['day'] == "":
+            dict['month_name'] = "November"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Nov."
+    elif dict['month'] == 12:
+        if dict['day'] == "":
+            dict['month_name'] = "December"
+        elif dict['day'] != 0:
+            dict['month_name'] = "Dec."
     else:
         dict['month_name'] = "error"
     return dict
@@ -109,6 +135,33 @@ def combine_func(dict):
     combined_list.append(", " + dict['year'] + ".")
     dict['combined_list'] = "".join(combined_list) # convert list to string
     return dict
+
+def copy_to_clipboard(dict):
+    pc.copy(dict['combined_list'])
+
+def login(dict):
+    # save values inputted by user as variables
+    dict['author1'] = author1gui.get()
+    dict['author2'] = author2gui.get()
+    dict['author3'] = author3gui.get()
+    dict['author4'] = author4gui.get()
+    dict['title'] = titlegui.get()
+    dict['organisation'] = organisationgui.get()
+    dict['year'] = str(yeargui.get())
+    dict['month'] = int(monthgui.get())
+    dict['day'] = str(daygui.get())
+    # run functions
+    dict = validation_func(dict) # checks if all required fields are filled in
+    dict = month_func(dict) # adds letter name of the month to the dictionary
+    dict = author_func(dict) # combines all authors into a single string with surname followed by first name
+    dict = combine_func(dict) # combines all user inputs into a single string to show as a citation
+    copy_to_clipboard(dict) # copies data from dict['combined_list'] to clipboard
+    # output final result
+    output = ctk.CTkLabel(master=frame, text=dict['combined_list'], font=("Roboto", 10))
+    output.pack(pady=4, padx=3)
+    output = ctk.CTkLabel(master=frame, text='Your formatted citation has been copied to clipboard.', font=("Roboto", 10))
+    output.pack(pady=1, padx=1)
+
 
 button = ctk.CTkButton(master=frame, text="Submit", command=lambda: login(dict))
 button.pack(pady=12, padx=10)
