@@ -9,8 +9,8 @@ ctk.set_appearance_mode("default") # or choose 'dark' or 'light'
 ctk.set_default_color_theme("dark-blue")
 
 # set GUI size
-root = ctk.CTk()
-#root.geometry("500x700")
+root = ctk.CTk() # create CTk root window
+#root.geometry("500x700") # set window width and height
 frame = ctk.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
@@ -114,11 +114,6 @@ def month_func(dict):
             dict['month_name'] = "Dec."
     else:
         dict['month_name'] = "error"
-    return dict
-
-# function is only activated when user selects "Yes" in multi_authors tickbox in customtkinter GUI. This function won't work in here.
-def multi_author_selector_func(dict):
-    dict['multi_authors'] == "Yes"
     return dict
 
 # when users input multiple names into 'author1' field, this funciton will split them into individual authors, then save result into dictionary under dict['author']
