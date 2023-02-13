@@ -59,6 +59,8 @@ textbox = ctk.CTkTextbox(master=frame, height=60, width=200, corner_radius=0)
 textbox.pack(pady=3, padx=3)
 clear_textbox_button = ctk.CTkButton(master=frame, text="Clear results", command=lambda: clear_textbox_func(dict, textbox)) # button to clear textbox/result
 clear_textbox_button.pack(pady=3, padx=3)
+copy_textbox_results_button = ctk.CTkButton(master=frame, text="Copy all results", command=lambda: copy_all_results_to_clipboard_func(textbox)) # button to copy textbox/result
+copy_textbox_results_button.pack(pady=3, padx=3)
 
 # function to check if all required fields are filled in
 def validation_func(dict):
@@ -66,8 +68,13 @@ def validation_func(dict):
         for x in ['author1', 'title', 'organisation', 'year']:
             if dict[x] == "":
                 print("Please fill in all required fields.")
-                dict[x] = str(input("Please enter " + x + ": "))
-    #TODO add code to check if authors have both name and surname are filled in using split(" ") and using len() on the result to see if there are at least 2 items in that list
+                # TODO exit code or loop again
+            #TODO 
+            # replace double spaces with single spaces in all CTkEntry widgets by looping thru them and applying this:
+            # string = str(sample_widget.get('0.0', 'end')).replace("  ", " ")
+            # sample_widget.configure(text=string)
+            # I'll need to pass each widget to this function. If '0.0' doesn't work, try 0.
+    #TODO add code to check if both name and surname of authors have been populated. To do it use 'split(" ")' and use 'len()' on the result to see if there are at least 2 items in that list
     return dict
 
 # function to change month number to month name
@@ -171,8 +178,11 @@ def combine_func(dict):
     dict['combined_list'] = str(dict['combined_list']).replace(", ,", ",") # fixes issues where string contains ', ,' which happens if user doesn't enter month and day
     return dict
 
-def copy_to_clipboard_func(dict):
+def copy_result_to_clipboard_func(dict):
     pc.copy(dict['combined_list'])
+
+def copy_all_results_to_clipboard_func(textbox):
+    pc.copy(textbox.get("0.0", "end"))
 
 def clear_form_func(dict): # TODO no need to pass 'dict' to this function. No need to return 'dict' either
     author1gui.delete(0, 'end')
@@ -210,13 +220,11 @@ def login_func(dict, textbox, output_msg):
     dict = month_func(dict) # adds letter name of the month to the dictionary
     dict = author_func(dict) # combines all authors into a single string with surname followed by first name
     dict = combine_func(dict) # combines all user inputs into a single string to show as a citation
-    copy_to_clipboard_func(dict) # copies data from dict['combined_list'] to clipboard
+    copy_result_to_clipboard_func(dict) # copies data from dict['combined_list'] to clipboard
 
     # output final result
     textbox.insert("end", text=str(dict['combined_list'] + os.linesep))
     output_msg.configure(text='Last formatted citation has been copied to clipboard.')
-
-
 
 root.mainloop() # run the main customtkinter GUI loop endlessly
 
