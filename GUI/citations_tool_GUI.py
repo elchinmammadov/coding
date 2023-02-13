@@ -68,7 +68,9 @@ def validation_func(dict):
         for x in ['author1', 'title', 'organisation', 'year']:
             if dict[x] == "":
                 print("Please fill in all required fields.")
-                # TODO exit code or loop again
+                # TODO either:
+                # pop-up message and loop again, OR
+                # exit app
             #TODO 
             # replace double spaces with single spaces in all CTkEntry widgets by looping thru them and applying this:
             # string = str(sample_widget.get('0.0', 'end')).replace("  ", " ")
