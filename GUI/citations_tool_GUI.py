@@ -72,8 +72,8 @@ def validation_func(dict):
             #TODO 
             # replace double spaces with single spaces in all CTkEntry widgets by looping thru them and applying this:
             # string = str(sample_widget.get('0.0', 'end')).replace("  ", " ")
-            # sample_widget.configure(text=string)
-            # I'll need to pass each widget to this function. If '0.0' doesn't work, try 0.
+            # sample_widget.configure(text=string) OR sample_widget.insert("0.0", text=string)
+            # I'll need to pass each widget to this function. If '0.0' doesn't work, try 0. If 'text=' doesn't work, try 'placeholder_text='.
     #TODO add code to check if both name and surname of authors have been populated. To do it use 'split(" ")' and use 'len()' on the result to see if there are at least 2 items in that list
     return dict
 
@@ -195,7 +195,6 @@ def clear_form_func(dict): # TODO no need to pass 'dict' to this function. No ne
     monthgui.delete(0, 'end')
     daygui.delete(0, 'end')
     checkbox.deselect()
-    #dict = {}
     return dict
 
 def clear_textbox_func(dict, textbox): # TODO no need to pass 'dict' to this function. No need to return 'dict' either
