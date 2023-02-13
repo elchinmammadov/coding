@@ -1,15 +1,16 @@
 import customtkinter as ctk # to build GUI
 import pyperclip as pc # to copy formatted citation to clipboard
 import re # to split string using multiple delimiters
+import os # to insert new line in a string
 
-#You can use these button options in ctk:
-    # label: CTkLabel
-    # button: CTkButton
-    # entry field: CTkEntry
-    # combo box: CTkOptionMenu
-    # check box: CTkCheckBox
-    # radio button: CTkRadioButton
-    # text box: CTkTextbox
+# types of Ctk widgets:
+    # CTkLabel is a label
+    # CTkButton is a button
+    # CTkEntry is an entry field
+    # CTkOptionMenu is a combo box: 
+    # CTkCheckBox is a check box
+    # CTkRadioButton is a radio button
+    # CTkTextbox is a text box
 
 dict = {} # create an empty dictionary to store and manipulate user inputs (author, title, etc.)
 
@@ -48,8 +49,16 @@ daygui = ctk.CTkEntry(master=frame, placeholder_text="Day (optional)")
 daygui.pack(pady=3, padx=3)
 checkbox = ctk.CTkCheckBox(master=frame, text="All authors in one line", onvalue="Yes", offvalue="No")
 checkbox.pack(pady=3, padx=3)
-textbox = ctk.CTkTextbox(master=frame, height=40, width=200, corner_radius=0, state="disabled")
+submit_button = ctk.CTkButton(master=frame, text="Submit", command=lambda: login_func(dict, textbox, output_msg)) # Submit button
+submit_button.pack(pady=3, padx=3)
+clear_form_button = ctk.CTkButton(master=frame, text="Clear form", command=lambda: clear_form_func(dict)) # button to clear form
+clear_form_button.pack(pady=3, padx=3)
+output_msg = ctk.CTkLabel(master=frame, text='Your citation will appear here.', font=("Roboto", 10))
+output_msg.pack(pady=1, padx=1)
+textbox = ctk.CTkTextbox(master=frame, height=60, width=200, corner_radius=0)
 textbox.pack(pady=3, padx=3)
+clear_textbox_button = ctk.CTkButton(master=frame, text="Clear results", command=lambda: clear_textbox_func(dict, textbox)) # button to clear textbox/result
+clear_textbox_button.pack(pady=3, padx=3)
 
 # function to check if all required fields are filled in
 def validation_func(dict):
@@ -162,10 +171,10 @@ def combine_func(dict):
     dict['combined_list'] = str(dict['combined_list']).replace(", ,", ",") # fixes issues where string contains ', ,' which happens if user doesn't enter month and day
     return dict
 
-def copy_to_clipboard(dict):
+def copy_to_clipboard_func(dict):
     pc.copy(dict['combined_list'])
 
-def clear(dict):
+def clear_form_func(dict): # TODO no need to pass 'dict' to this function. No need to return 'dict' either
     author1gui.delete(0, 'end')
     author2gui.delete(0, 'end')
     author3gui.delete(0, 'end')
@@ -176,11 +185,14 @@ def clear(dict):
     monthgui.delete(0, 'end')
     daygui.delete(0, 'end')
     checkbox.deselect()
-    textbox.delete(0, 'end')
-    dict = {}
+    #dict = {}
     return dict
 
-def login(dict):
+def clear_textbox_func(dict, textbox): # TODO no need to pass 'dict' to this function. No need to return 'dict' either
+    textbox.delete("0.0", "end")
+    return dict
+
+def login_func(dict, textbox, output_msg):
     # save values inputted by user as variables
     dict['author1'] = author1gui.get()
     dict['author2'] = author2gui.get()
@@ -198,21 +210,12 @@ def login(dict):
     dict = month_func(dict) # adds letter name of the month to the dictionary
     dict = author_func(dict) # combines all authors into a single string with surname followed by first name
     dict = combine_func(dict) # combines all user inputs into a single string to show as a citation
-    copy_to_clipboard(dict) # copies data from dict['combined_list'] to clipboard
+    copy_to_clipboard_func(dict) # copies data from dict['combined_list'] to clipboard
 
     # output final result
-    textbox.delete("0.0", "200.0")
-    textbox.insert("0.0", text=str(dict['combined_list'])) # BUG I get no error but this text box doesn't show output data
-    textbox.pack(pady=4, padx=3)
-    output_msg = ctk.CTkLabel(master=frame, text='Your formatted citation has been copied to clipboard.', font=("Roboto", 10))
-    output_msg.pack(pady=1, padx=3)
-    output_text = ctk.CTkLabel(master=frame, text=dict['combined_list'], font=("Roboto", 10))
-    output_text.pack(pady=4, padx=3)
+    textbox.insert("end", text=str(dict['combined_list'] + os.linesep))
+    output_msg.configure(text='Last formatted citation has been copied to clipboard.')
 
-submit_button = ctk.CTkButton(master=frame, text="Submit", command=lambda: login(dict)) # Submit button
-submit_button.pack(pady=3, padx=3)
-clear_button = ctk.CTkButton(master=frame, text="Clear", command=lambda: clear(dict)) # Clear button
-clear_button.pack(pady=3, padx=3)
 
 
 root.mainloop() # run the main customtkinter GUI loop endlessly
