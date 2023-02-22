@@ -11,22 +11,22 @@ def index(response, id):
     # item = ls.item_set.get(id=1)
     # return HttpResponse('<h1>%s</h1>' % ls.name)
     # return HttpResponse('<h1>%s</h1><br></br><p>%s</p>' % (ls.name, str(item.text)))
-    return render(response, 'main/list.html', {"ls": ls})
+    return render(response, 'main/list.html', {"ls": ls}) # to find and show to-do list using its id number 
 
 def home(response):
     return render(response, 'main/home.html', {}) # home page (i.e. landing page)
 
-def create(response):
-    if response.method == 'POST':
+def create(response): # function to create a new to-do list
+    if response.method == 'POST': # if we click submit button, it creates a new to-do list and redirects us to its page
         form = CreateNewList(response.POST)
         if form.is_valid():
             n = form.cleaned_data['name']
             t = ToDoList(name=n)
             t.save()
-            return HttpResponseRedirect('/%i' % t.id)
+            return HttpResponseRedirect('/%i' % t.id) # redirects to to-do list page that we've just created using its id number
     else:
-        form = CreateNewList()
-    return render(response, 'main/create.html', {'form': form}) # create to-do list
+        form = CreateNewList() # shows form to create a new to-do list
+    return render(response, 'main/create.html', {'form': form}) # create to-do list using a form
 
 # def index(response):
 #     return HttpResponse('<h1>Hello world</h1>')
