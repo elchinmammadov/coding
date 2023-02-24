@@ -5,10 +5,10 @@ Create a to-do list
 {% endblock %}
 
 {% block content %}
-    Create page
-    <form method="post" action="/create/">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit", name="save">Create new</button>
-    </form>
+Create page
+<form method="post" action="/create/">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit", name="save">Create new</button>
+</form>
 {% endblock %}
